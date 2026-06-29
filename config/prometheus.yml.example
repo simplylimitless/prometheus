@@ -1,0 +1,32 @@
+# Sample configuration for Prometheus.
+# Copy this file to prometheus.yml and edit for your environment.
+# The live config (prometheus.yml) is gitignored — never commit secrets.
+
+global:
+  scrape_interval:     15s   # How often to scrape targets.
+  evaluation_interval: 15s   # How often to evaluate rules.
+  # scrape_timeout is set to the global default (10s).
+
+  # Labels attached to metrics sent to federation / remote storage / Alertmanager.
+  external_labels:
+    monitor: 'homelab'
+
+# Rule files to load (optional).
+# rule_files:
+#   - "alert.rules"
+
+scrape_configs:
+
+  # ── Self-monitoring ────────────────────────────────────────────────
+  - job_name: 'prometheus'
+    scrape_interval: 5s
+    scrape_timeout:  5s
+    static_configs:
+      - targets: ['localhost:9090']
+
+  # ── Example node exporter ──────────────────────────────────────────
+  # Uncomment and adjust for your setup.
+  # - job_name: 'node'
+  #   metrics_path: /metrics
+  #   static_configs:
+  #     - targets: ['localhost:9100']
