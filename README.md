@@ -7,7 +7,7 @@ Prometheus configuration for a homelab monitoring setup. Docker-based, scraping 
 ### Deploy from GitHub Container Registry
 
 ```bash
-docker login ghcr.io -u YOUR_GITHUB_USERNAME
+docker login ghcr.io -u YOUR_GITHUB_USERNAME   # password: a GitHub PAT with `packages` scope (create one at https://github.com/settings/tokens, not the fine-grained type)
 docker pull ghcr.io/simplylimitless/homelab-prometheus:latest
 docker run -p 9090:9090 --name prometheus ghcr.io/simplylimitless/homelab-prometheus:latest
 ```
