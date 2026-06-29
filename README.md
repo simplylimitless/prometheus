@@ -23,10 +23,10 @@ Browse to `http://localhost:9090`.
 
 ### CI/CD
 
-Pushing to `main` triggers an automatic build (see [`.github/workflows/docker.yml`](.github/workflows/docker.yml)). Each push is tagged with both `latest` and a build number (e.g. `build-1`, `build-2`) for rollback:
+Pushing to `main` triggers an automatic build (see [`.github/workflows/docker.yml`](.github/workflows/docker.yml)). Each push is tagged with both `latest` and a numeric build ID for rollback:
 
 ```bash
-docker pull ghcr.io/simplylimitless/homelab-prometheus:build-3
+docker pull ghcr.io/simplylimitless/homelab-prometheus:3
 ```
 
 See [CLAUDE.md](CLAUDE.md) for the full list of scrape targets and config details.
