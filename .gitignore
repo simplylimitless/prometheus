@@ -1,0 +1,2 @@
+# Live Prometheus config — contains secrets, inject at deploy time.
+config/prometheus.yml
