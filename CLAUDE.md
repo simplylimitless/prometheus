@@ -8,6 +8,15 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - `.gitignore` — Ignores `config/prometheus.yml` (contains secrets, injected at deploy time).
 - `config/prometheus.yml.example` — Sanitized template showing the full scrape configuration. Copy to `prometheus.yml` and fill in your targets / tokens.
 
+## GitHub Container Registry (GHCR)
+
+Pushing to `main` triggers an automatic CI build that pushes the image to GHCR. You must configure a PAT secret for this to work:
+
+1. Create a **classic** PAT at https://github.com/settings/tokens (not fine-grained — the `packages` scope isn't available on fine-grained tokens). Tick **`packages`**.
+2. Add it as a repository secret named `GHCR_PAT` under **Settings → Secrets and variables → Actions**.
+
+The workflow uses this PAT to authenticate Docker pushes to `ghcr.io/simplylimitless/homelab-prometheus:latest` and `ghcr.io/simplylimitless/homelab-prometheus:<run_number>`. The automatic `GITHUB_TOKEN` does not grant GHCR package write permissions.
+
 ## How to run
 
 ```bash

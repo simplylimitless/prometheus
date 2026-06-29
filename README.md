@@ -29,5 +29,7 @@ Pushing to `main` triggers an automatic build (see [`.github/workflows/docker.ym
 docker pull ghcr.io/simplylimitless/homelab-prometheus:3
 ```
 
+**GHCR write permission:** The workflow uses a PAT stored in the repository secret `GHCR_PAT` to push to GitHub Container Registry. Create one at https://github.com/settings/tokens (classic tokens, not fine-grained — that scope isn't available there) with the **`packages`** scope ticked, then add it as a repo secret named `GHCR_PAT`. The automatic `GITHUB_TOKEN` doesn't grant GHCR package write permissions, so this PAT is required.
+
 See [CLAUDE.md](CLAUDE.md) for the full list of scrape targets and config details.
 # homelab-prometheus
