@@ -21,6 +21,8 @@ docker run -p 9090:9090 --name prometheus homelab-prometheus
 
 Browse to `http://localhost:9090`.
 
+> **Note:** After setting up the `GHCR_PAT` secret, re-run the workflow from the Actions tab or push a test commit if you don't see the image published yet.
+
 ### CI/CD
 
 Pushing to `main` triggers an automatic build (see [`.github/workflows/docker.yml`](.github/workflows/docker.yml)). Each push is tagged with both `latest` and a numeric build ID for rollback:
