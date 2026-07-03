@@ -19,6 +19,16 @@ docker build -t homelab-prometheus .
 docker run -p 9090:9090 --name prometheus homelab-prometheus
 ```
 
+### With Docker Compose (recommended)
+
+```bash
+# 1. Create your live config from the example
+cp config/prometheus.yml.example config/prometheus.yml
+# 2. Edit config/prometheus.yml — add real tokens, adjust targets
+
+docker compose up --build -d
+```
+
 Browse to `http://localhost:9090`.
 
 > **Note:** After setting up the `GHCR_PAT` secret, re-run the workflow from the Actions tab or push a test commit if you don't see the image published yet.
@@ -32,6 +42,10 @@ docker pull ghcr.io/simplylimitless/homelab-prometheus:3
 ```
 
 **GHCR write permission:** The workflow uses a PAT stored in the repository secret `GHCR_PAT` to push to GitHub Container Registry. Create one at https://github.com/settings/tokens (classic tokens, not fine-grained — that scope isn't available there) with the **`packages`** scope ticked, then add it as a repo secret named `GHCR_PAT`. The automatic `GITHUB_TOKEN` doesn't grant GHCR package write permissions, so this PAT is required.
+
+## Configuration
+
+`.gitignore` excludes `config/prometheus.yml` (contains secrets, injected at deploy time). A clean template ships as [`config/prometheus.yml.example`](config/prometheus.yml.example). Copy to `prometheus.yml` and fill in your targets / tokens.
 
 See [CLAUDE.md](CLAUDE.md) for the full list of scrape targets and config details.
 # homelab-prometheus
