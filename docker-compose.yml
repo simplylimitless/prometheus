@@ -1,0 +1,8 @@
+services:
+  prometheus:
+    build: .
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./config:/etc/prometheus
+    container_name: prometheus
