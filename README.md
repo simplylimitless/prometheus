@@ -31,6 +31,28 @@ docker compose up --build -d
 
 Browse to `http://localhost:9090`.
 
+### Compose volumes
+
+| Mount | Purpose |
+|-------|---------|
+| `./config` → `/etc/prometheus` | Prometheus config files (`prometheus.yml`, rules, etc.) |
+
+No data volume is mounted by default — all metrics are stored inside the container and will be lost on recreate. For persistence, add a named volume to your compose file:
+
+```yaml
+volumes:
+  prometheus_data:
+
+services:
+  prometheus:
+    # ...
+    volumes:
+      - ./config:/etc/prometheus
+      - prometheus_data:/prometheus
+```
+
+Or bind-mount an existing directory instead (`- /host/path:/prometheus`).
+
 > **Note:** After setting up the `GHCR_PAT` secret, re-run the workflow from the Actions tab or push a test commit if you don't see the image published yet.
 
 ### CI/CD
