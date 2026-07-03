@@ -47,5 +47,4 @@ docker pull ghcr.io/simplylimitless/homelab-prometheus:3
 
 `.gitignore` excludes `config/prometheus.yml` (contains secrets, injected at deploy time). A clean template ships as [`config/prometheus.yml.example`](config/prometheus.yml.example). Copy to `prometheus.yml` and fill in your targets / tokens.
 
-See [CLAUDE.md](CLAUDE.md) for the full list of scrape targets and config details.
-# homelab-prometheus
+
