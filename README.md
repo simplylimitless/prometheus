@@ -2,6 +2,8 @@
 
 Prometheus configuration for a homelab monitoring setup. Docker-based, scraping Prometheus itself, multiple node exporters (via `node_exporter` containers), and Home Assistant's Prometheus API.
 
+**Supported architectures:** `linux/amd64`, `linux/arm64`, `linux/arm/v7` — the published image is a multi-arch manifest, so `docker pull`/`docker run` automatically select the right variant for your host (x86_64 servers, 64-bit Raspberry Pi 4/5, and 32-bit Raspberry Pi 2/3).
+
 ## Quick start
 
 ### Deploy from GitHub Container Registry
@@ -57,7 +59,7 @@ Or bind-mount an existing directory instead (`- /host/path:/prometheus`).
 
 ### CI/CD
 
-Pushing to `main` triggers an automatic build (see [`.github/workflows/docker.yml`](.github/workflows/docker.yml)). Each push is tagged with both `latest` and a numeric build ID for rollback:
+Pushing to `main` triggers an automatic multi-arch build (`linux/amd64`, `linux/arm64`, `linux/arm/v7`, via Docker Buildx + QEMU — see [`.github/workflows/docker.yml`](.github/workflows/docker.yml)). Each push is tagged with both `latest` and a numeric build ID for rollback:
 
 ```bash
 docker pull ghcr.io/simplylimitless/homelab-prometheus:3
