@@ -1,4 +1,4 @@
-# homelab-prometheus
+# prometheus
 
 Prometheus configuration for a homelab monitoring setup. Docker-based, scraping Prometheus itself, multiple node exporters (via `node_exporter` containers), and Home Assistant's Prometheus API.
 
@@ -10,15 +10,15 @@ Prometheus configuration for a homelab monitoring setup. Docker-based, scraping 
 
 ```bash
 docker login ghcr.io -u YOUR_GITHUB_USERNAME   # password: a GitHub PAT with `packages` scope (create one at https://github.com/settings/tokens, not the fine-grained type)
-docker pull ghcr.io/simplylimitless/homelab-prometheus:latest
-docker run -p 9090:9090 --name prometheus ghcr.io/simplylimitless/homelab-prometheus:latest
+docker pull ghcr.io/simplylimitless/prometheus:latest
+docker run -p 9090:9090 --name prometheus ghcr.io/simplylimitless/prometheus:latest
 ```
 
 ### Or build locally
 
 ```bash
-docker build -t homelab-prometheus .
-docker run -p 9090:9090 --name prometheus homelab-prometheus
+docker build -t prometheus .
+docker run -p 9090:9090 --name prometheus prometheus
 ```
 
 ### With Docker Compose (recommended)
@@ -62,7 +62,7 @@ Or bind-mount an existing directory instead (`- /host/path:/prometheus`).
 Pushing to `main` triggers an automatic multi-arch build (`linux/amd64`, `linux/arm64`, `linux/arm/v7`, via Docker Buildx + QEMU — see [`.github/workflows/docker.yml`](.github/workflows/docker.yml)). Each push is tagged with both `latest` and a numeric build ID for rollback:
 
 ```bash
-docker pull ghcr.io/simplylimitless/homelab-prometheus:3
+docker pull ghcr.io/simplylimitless/prometheus:3
 ```
 
 **GHCR write permission:** The workflow uses a PAT stored in the repository secret `GHCR_PAT` to push to GitHub Container Registry. Create one at https://github.com/settings/tokens (classic tokens, not fine-grained — that scope isn't available there) with the **`packages`** scope ticked, then add it as a repo secret named `GHCR_PAT`. The automatic `GITHUB_TOKEN` doesn't grant GHCR package write permissions, so this PAT is required.
